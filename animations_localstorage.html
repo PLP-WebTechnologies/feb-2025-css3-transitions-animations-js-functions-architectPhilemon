@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animations and LocalStorage</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.1);
+    }
+
+    /* Animation Section */
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #4CAF50;
+      margin: 20px auto;
+      border-radius: 10px;
+      animation: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-50px);
+      }
+    }
+
+    .bounce {
+      animation: bounce 0.5s ease-in-out infinite;
+    }
+
+    /* Theme Section */
+    .theme-button {
+      background-color: #2196F3;
+      color: white;
+    }
+
+    .theme-button:hover {
+      background-color: #1976D2;
+    }
+
+    .dark-theme {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .light-theme {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Animations and LocalStorage</h1>
+
+  <!-- Animation Section -->
+  <h2>Click the Button to Animate the Box</h2>
+  <div class="box" id="animatedBox"></div>
+  <button id="animateButton">Start Animation</button>
+
+  <!-- Theme Section -->
+  <h2>Choose Your Theme</h2>
+  <button class="theme-button" id="lightThemeButton">Light Theme</button>
+  <button class="theme-button" id="darkThemeButton">Dark Theme</button>
+
+  <script>
+    // Animation Trigger
+    const animateButton = document.getElementById('animateButton');
+    const animatedBox = document.getElementById('animatedBox');
+
+    animateButton.addEventListener('click', () => {
+      animatedBox.classList.toggle('bounce');
+    });
+
+    // Theme Toggle with LocalStorage
+    const lightThemeButton = document.getElementById('lightThemeButton');
+    const darkThemeButton = document.getElementById('darkThemeButton');
+
+    // Apply saved theme on page load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.body.className = savedTheme;
+    }
+
+    lightThemeButton.addEventListener('click', () => {
+      document.body.className = 'light-theme';
+      localStorage.setItem('theme', 'light-theme');
+    });
+
+    darkThemeButton.addEventListener('click', () => {
+      document.body.className = 'dark-theme';
+      localStorage.setItem('theme', 'dark-theme');
+    });
+  </script>
+</body>
+</html>
